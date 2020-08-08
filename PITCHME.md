@@ -2,6 +2,7 @@
 #### チーム開発時にやっておいたほうが良いこと
 #### 〜how to raise a Boring source code〜
 #### Yuuki Nakajima
+
 ---
 
 #### 問題意識
@@ -51,7 +52,8 @@ Agenda
 ---
 
 
-```[code-1bad sample]
+[001_ GuiltyCode.py]
+```
 import sys
 
 def TranslationCall(Input):
@@ -75,22 +77,28 @@ tiger
 ```
 ---
 
-- Pythonのコーディング規約pep8に付いて(5min)
-
-
----
-
-
----
-
-- なんでも動けばええじゃろ?
-- こまけぇことはいいんだよ！
-
---
-
 そこでPEP8
 
+
 ---
+PEP8ってなに？
+
+---
+という前に先ほどのコードをPyCharmで開いてみましょう
+
+![alt](assets/image_001.jpg)
+
+
+---
+
+
+そう言えば警告ってどんなルールに基づいて表示されているの？
+
+---
+そのルールがPEP8です(キリッ)
+
+---
+
 PEPってなに？
 
 What is a PEP?
@@ -105,27 +113,28 @@ https://www.python.org/dev/peps/pep-0001/#id34
 ---
 
 What is a PEP?
-PEP stands for Python Enhancement Proposal.
-→　PEPとはPython改良提案を意味する語の頭文字を取ってPEP
+PEP stands for Python Enhancement Proposal.<br>
+ PEPとはPython改良提案を意味する語の頭文字を取ってPEP
 
-A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.
-→PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
+A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.<br>
+PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
 
-
----
-We intend PEPs to be the primary mechanisms for proposing major new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Python. The PEP author is responsible for building consensus within the community and documenting dissenting opinions.
-
-###### 私たちは、PEPが主要な新機能を提案したり、問題に関するコミュニティの意見を収集したり、Pythonに取り入れられた設計上の決定を文書化したりするための主要なメカニズムになることを意図しています。 PEPの作成者は、コミュニティ内でコンセンサスを構築し、反対意見を文書化する責任があります。
----
-
-##### Because the PEPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal
-
-##### PEPはバージョン管理されたリポジトリでテキストファイルとして維持されるため、その改訂履歴は機能提案の履歴レコードです。
 ---
 
 PEPの例
+PEP11
+- Removing support for little used platforms
 
-いくつかのPEPを紹介
+```
+Name: MS-DOS, MS-Windows 3.x
+Unsupported in: Python 2.0
+Code removed in: Python 2.1
+```
+https://www.python.org/dev/peps/pep-0011/
+
+windows3.1ではpython2.0でサポートを切られたことが分かる
+
+
 
 ---
 PEP８とは
