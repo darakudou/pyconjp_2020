@@ -1,0 +1,3 @@
+- pepについて
+
+https://docs.pyq.jp/column/python.html

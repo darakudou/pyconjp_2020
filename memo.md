@@ -73,3 +73,13 @@ formatterの調査
 - autopep
 - black 
 - yapf
+
+
+## スライドの統一感をどう持たすか？
+絶対にイラストやさんは使わない
+
+
+ストーリー下手でいきたい
+タイトルの元ネタは全部冴えカノでいく
+how to raise a boring code
+冴えないコードの育て方  
