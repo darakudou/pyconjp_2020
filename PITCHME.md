@@ -4,59 +4,61 @@
 #### Yuuki Nakajima
 
 ---
-
 #### 問題意識
-- プログラマーはどうしても個人の癖がでてしまう。
-- 全体としてルールが統一がされていないことがある。
-- Pythonに不慣れだと他の言語の癖がでてしまう
-- 後から見てとても辛いソースになる
-- 開発環境が異なるとIDEで開いた瞬間に警告がたくさんでる人と出ない人がいる
----
+- プログラミングはどうしても個人の"癖"がでてしまう。
+- 全体として書き方が統一がされていないことがある。
 
 - そういった部分をレビューで指摘するのはしんどい
 - pythonの規約に対する警告などはgitの差分とかでは見過ごしてしまう
-- とりあえずflake8(内容を理解せずに使ってる(自分のこと))
-- とりあえずblack(内容を理解せずに使っている(自分の(ry)
+   - classとclassの間が2行空いてるかとか見ない・・・
+---
+大体自分程度が悩むことは先人の誰かが悩んでいて解決案もある!
+
 
 ---
-
-Agenda
-  - avant-title
-  - introduction
-  - probrem
-  - An warning-ridden Prologue next!
-  - What is  PEP-8?
-      - about PEP(Python Enhancement Proposal)
-      -　explain PEP-8
-  - code check tools
-      - flake8
-      - mypy
-      - pylint
-      - seed-isort-confing
-  - summary
-  - use formatter 
-      - About formatter
-          - introduce some library
-              - autopep
-              - black
-              - yapf
-          - compare these library
-   - pre-commit!
-      - about pre-commit
-      - example pre-commit
-      - 
-   - summary
-   - QA 
+という話しを今回はしようと思っていました
 
 
 ---
 
+が・・・・！！！
 
+----
+### 話そうと思ってたことは大体書かれてしまった！ 
+
+![alt](assets/image_000_web_db_press.jpg)
+
+> 現場のPython ── システム開発も！ 機械学習も！
+【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定
+#### TODO:URLは変わる
+https://www.fujisan.co.jp/product/1281680264/new/
+
+---
+
+CfPを出した後にこれが出てきたのでとても辛い
+
+---
+気を取り直してちょっと補足的な内容にしようと思います
+
+---
+#### 目次
+
+- 冴えないコードの防ぎ方
+  - 罪深きソースコードの例
+  - PEP8とは
+  - flake8でコードチェック
+- 冴えたコードの作り方
+  - formatterによるチェック 
+
+---
 [001_ GuiltyCode.py]
+
 ```
 import sys
+import this
 
-def TranslationCall(Input):
+def translationCall(Input):
+    aaaaaaa = Input
     if Input == "虎":
         return "tiger" 
     if Input == "火":
@@ -66,9 +68,10 @@ def TranslationCall(Input):
 
 if __name__ == "__main__":
     Input  = sys.argv[1] 
-    returnVAlue = TranslationCall(Input);
+    returnVAlue = translationCall(Input);
     print(returnVAlue)
 ```
+
 正しく動作する
 
 ```
@@ -78,7 +81,6 @@ tiger
 ---
 
 そこでPEP8
-
 
 ---
 PEP8ってなに？
@@ -99,24 +101,23 @@ PEP8ってなに？
 
 ---
 
-PEPってなに？
+さらに遡ってPEPってなに？
 
 What is a PEP?
 PEP stands for Python Enhancement Proposal. A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment. The PEP should provide a concise technical specification of the feature and a rationale for the feature.
-
-We intend PEPs to be the primary mechanisms for proposing major new features, for collecting community input on an issue, and for documenting the design decisions that have gone into Python. The PEP author is responsible for building consensus within the community and documenting dissenting opinions.
-
-Because the PEPs are maintained as text files in a versioned repository, their revision history is the historical record of the feature proposal
 
 https://www.python.org/dev/peps/pep-0001/#id34
 
 ---
 
-What is a PEP?
+>What is a PEP?
 PEP stands for Python Enhancement Proposal.<br>
- PEPとはPython改良提案を意味する語の頭文字を取ってPEP
 
-A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.<br>
+PEPとはPython改良提案を意味する語の頭文字を取ってPEP
+
+
+>A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.<br>
+
 PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
 
 ---
@@ -134,16 +135,35 @@ https://www.python.org/dev/peps/pep-0011/
 
 windows3.1ではpython2.0でサポートを切られたことが分かる
 
-
-
 ---
 PEP８とは
 
 - PEPで提案されたコード規約
 
 ---
+#### いくつか紹介
+- 一貫性にこだわりすぎるのは、狭い心の現れである
+- 関数の名前は小文字で単語はアンスコ(_)で繋ぐ
+- goto_travel
+- クラス名はCapsWordsで書く
+  - e.g class Itaewon():
+- 関数やクラスは2行ずつ空ける
+- メソッドは1行空ける
 
-- コード規約についていくつか紹介
+---
+ このくらいなら意識できそう
+
+---
+#### 他のルール
+  - 1行の長さは79文字
+  - importの順番
+    - 標準ライブラリ
+      - Pythonが持ってるライブラリ,datetimeとか)
+    - サードパーティライブラリ
+      - pip installしたライブラリ,requestsとか)
+    - 自分のライブラリ
+      - from util import my_function
+    -  それぞれアルファベット順にする
 
 ---
 
@@ -151,40 +171,177 @@ PEP８とは
 
 ---
 
-- flake8について
-
-Flake8 is a wrapper around these tools:
-
-PyFlakes
-pycodestyle
-Ned Batchelder’s McCabe script
-
-----
-- flake8での実例、使用例をいくつか書く
+- 機械にチェックしてもらいましょう
 
 ---
+
+##### 測りたいもの
+  - 未使用変数
+  - PEP８とのチェック
+  - コードの複雑さ  
+
+---
+
+pyflakes
+
+- コードチェックimportのみライブラリや未使用変数をチェック
+
+```
+% pyflakes .
+./001_ GuiltyCode.py:2:1 'this' imported but unused
+./001_ GuiltyCode.py:5:5 local variable 'aaaaaaa' is assigned to but never used
+```
+
+---
+pycodestyle
+ - コードチェック
+ - 改行とか空白の位置とかをチェック
+
+```
+pycodestyle 001_\ GuiltyCode.py 
+001_ GuiltyCode.py:3:1: E302 expected 2 blank lines, found 1
+001_ GuiltyCode.py:5:23: W291 trailing whitespace
+001_ GuiltyCode.py:8:22: E703 statement ends with a semicolon
+001_ GuiltyCode.py:12:10: E221 multiple spaces before operator
+001_ GuiltyCode.py:12:25: W291 trailing whitespace
+001_ GuiltyCode.py:13:41: E703 statement ends with a semicolon
+001_ GuiltyCode.py:14:23: W292 no newline at end of file
+```
+---
+mccabe 
+  - 複雑さをチェックする
+
+[002_complex_code.py]
+```
+import sys
+
+
+def translation(input):
+    ja_calls = ["虎", "火", "人造",  "繊維", "海女", "振動", "化繊"]
+    en_calls = ["tiger", "fire", "cyber", "fiber", "diver", "viber"]
+    i = 0
+    j = 0
+    is_unmatch = False
+    for c in ja_calls:
+        if c != input:
+            is_unmatch = True
+        if c == input:
+            is_unmatch = False
+        if is_unmatch:
+            i = i + 1
+            continue
+        for cc in en_calls:
+            if j != i:
+                j += 1
+                continue
+            return_value = en_calls[j]
+
+    if return_value:
+        return return_value
+    else:
+        return_value = "jya-jya-"
+    return return_value
+
+if __name__ == "__main__":
+    input = sys.argv[1]
+    output = translation(input)
+    print(output)
+```
+
+---
+
+- 複雑度が数字で表示される
+```
+% python -m mccabe --min 5 002_complex_code.py
+4:0: 'translation' 8
+```
+
+---
+この3つを合体したものがflake8
+
+---
+使い方
+```
+flake8 .
+./001_ GuiltyCode.py:2:1: F401 'this' imported but unused
+./001_ GuiltyCode.py:4:1: E302 expected 2 blank lines, found 1
+....
+```
+
+---
+
+複雑度もチェックする(defaultでは無効)
+```
+flake8 --max-complexity 5 002_complex_code.py 
+002_complex_code.py:4:1: C901 'translation' is too complex (8)
+```
+
+---
+
+まとめ
+ - pythonにはPEP8という指針がある
+ - 規約を守らせるためにflake8というライブラリを入れるとコードチェックできる
+---
+息抜き
+
+---
+flake8は進化する！
+
+---
+
+### flake8を最新化したら突然エラーになることがある！(週刊実話)
+
+---
+
+[003_f_string_faild.py]
+```
+def translation(input):
+    if input == "虎":
+        return "tiger"
+    return "jya-jya-"
+
+
+if __name__ == "__main__":
+    output = translation(f"虎")
+    print(output)
+```
+
+`output = translation(f"虎")` 
+
+f"虎" は確かに"虎"と同じなので無意味なのだが今まで許されていたのが
+pyflakesの2.2.0からこのチェックが加わったことで既存のコードに
+上記のような書き方が残っていると軒並みエラーに・・・・
+
+---
+ということで
+
+---
+flake8 で常にチェックしましょう！
+
+---
+
+カタカタカタカタカタカタカタカタカタッターンッ
+
+flake8 .
+error XXXX
+error XXXXX
+
+----
+
+カタカタカタカタカタカタカタカタカタッターンッ
+
+flake8 .
+error XXXX
+
+----
+
+:sub:
+
+---
+
+誰か代わりに直してよ
+
+---
+
+
 formatterでformatしよう
-
-
-
-
-
-- 導入（3min）
-- 自己紹介
-- 問題意識
-- チーム開発の場合、どうしても個人の癖がでてしまい、全体としてルールが統一がされていないことがある。 また開発環境の違いによっては警告がでる人と出ない人の差などがあり不快感もある。
-レビューの時でもそうした本質的ではない部分で指摘することは時間の無駄となっている。
-- Pythonのコーディング規約pep8に付いて(5min)
-- pep8とはなにか？
-- 実例紹介
-- formatterについて（10min）
-- autopepについての説明と実例
-- blackについての説明と実例
-− yapfについての説明と実例
-- それぞれの比較
-- pre-commitでformatterを自動化(8min)
-- 指定方法の実例
-- 上記の他に指定しておくといいものの紹介
-- seed-isort-confingやmypyなど
-- まとめ (1min)
-- 質疑応答 (3min)
