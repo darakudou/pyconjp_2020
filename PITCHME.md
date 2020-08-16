@@ -342,6 +342,73 @@ error XXXX
 誰か代わりに直してよ
 
 ---
-
-
 formatterでformatしよう
+---
+ググると出てくるライブラリ
+- black: スター数 17.1K(2020/08/15)
+  - https://github.com/psf/black
+- yapf: スター数 10.9k(2020/08/15)
+  - https://github.com/google/yapf
+- autopep8: スター数 3.5k(2020/08/15)
+  - https://github.com/hhatto/autopep8
+
+---
+
+だいたいblackでOKという記事がでてくる
+
+---
+
+blackってどんなライブラリ？特徴は？歴史は？他との比較は？彼氏は？調べてみました！
+
+---
+
+## black
+
+- 今のバージョンは19.10b0
+- まだベータ版とは書いてあるが大きな変更は予定されていない
+- 妥協のないpythonコードフォーマッター
+- 手動フォーマットを全てblackに譲ることになる
+- フォーマットで悩むことがなくなる
+
+---
+
+blackを通してもflake8は通らないものがある！
+
+---
+
+004_conflict_black_flake8
+```
+# E203 Whitespace before ':'
+name_lists = ["tarou", "hanako", "ichitarou", ""]
+a = name_lists[1 + 1 :]
+
+# E501 line too long (XX > 79 characters)
+name = "jyugemujyugemu gokounosurikire kaijyarisuigyono suigyoumatu unnkoumatu."
+
+# W503 line break before binary operator
+income = (3
+          + 4)
+```
+
+---
+
+### 対策
+
+とりあえずflake8からエラーを除外すればOK(公式に書かれた記載を転載)
+```
+[flake8]
+max-line-length = 80
+...
+select = C,E,F,W,B,B950
+ignore = E203, E501, W503
+```
+
+---
+
+### yapf
+
+- google製のフォーマッター
+- PEP8に準拠したコードが正しいとは限らない
+- end all holy wars about formatting
+- 日本語訳:フォーマットに関する全ての聖戦を終わらせる
+- 
