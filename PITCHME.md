@@ -9,22 +9,21 @@
 - 全体として書き方が統一がされていないことがある。
 
 - そういった部分をレビューで指摘するのはしんどい
-- pythonの規約に対する警告などはgitの差分とかでは見過ごしてしまう
+- Pythonの規約に対する警告などはgitの差分とかでは見過ごしてしまう
    - classとclassの間が2行空いてるかとか見ない・・・
----
-大体自分程度が悩むことは先人の誰かが悩んでいて解決案もある!
-
-
----
-という話しを今回はしようと思っていました
-
 
 ---
 
-が・・・・！！！
+Pythonのコード規約とそれを維持するためのtool紹介
+
+---
+
+みたいな話しをしようと思っていましたが。。。
+
 
 ----
-### 話そうと思ってたことは大体書かれてしまった！ 
+
+だいたい雑誌に書かれてしまった！
 
 ![alt](assets/image_000_web_db_press.jpg)
 
@@ -35,20 +34,43 @@ https://www.fujisan.co.jp/product/1281680264/new/
 
 ---
 
-CfPを出した後にこれが出てきたのでとても辛い
+とりあえずやりたいことはここを読めばOK
 
 ---
-気を取り直してちょっと補足的な内容にしようと思います
+ここでは何を話そう？
 
 ---
+だいたいPyCon JPを聴く層がこの辺の話しを知らないとは思えない。
+
+---
+
+悩んだ末に・・・
+
+---
+ここでは以下の要素を付け足すことで新しい価値を提供しようと思います。
+
+- 耳学問でflake8(後述)とかでチェックしているけど実は何をやっているか分かってない
+- とりあえずblack(後述)は正しいのか？
+
+---
+
 #### 目次
 
 - 冴えないコードの防ぎ方
   - 罪深きソースコードの例
-  - PEP8とは
-  - flake8でコードチェック
-- 冴えたコードの作り方
-  - formatterによるチェック 
+  - コード規約PEP8とは？
+    - PEPって何？
+    - PEPの例
+    - PEP8とは？
+  - flake8でソースをチェック
+    - flake8の使い方
+- 冴えたコードの維持の仕方
+  - formatterによるcheck
+  - とりあえずblackは正しいのか？
+    - AutoPep, yapf, blackの比較
+- formatterの自動化
+  - pre-commitで自動適応
+  -  
 
 ---
 [001_ GuiltyCode.py]
@@ -80,6 +102,9 @@ tiger
 ```
 ---
 
+このコードをどうやって否定するか？
+
+---
 そこでPEP8
 
 ---
@@ -97,11 +122,12 @@ PEP8ってなに？
 そう言えば警告ってどんなルールに基づいて表示されているの？
 
 ---
-そのルールがPEP8です(キリッ)
+
+そのルールがPEP8です
 
 ---
 
-さらに遡ってPEPってなに？
+そもそもPEPってなに？
 
 What is a PEP?
 PEP stands for Python Enhancement Proposal. A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment. The PEP should provide a concise technical specification of the feature and a rationale for the feature.
@@ -141,10 +167,10 @@ PEP８とは
 - PEPで提案されたコード規約
 
 ---
-#### いくつか紹介
+#### PEP8の紹介 
 - 一貫性にこだわりすぎるのは、狭い心の現れである
-- 関数の名前は小文字で単語はアンスコ(_)で繋ぐ
-- goto_travel
+- 関数の名前は小文字で単語はアンダースコア(_)で繋ぐ
+  - e.g goto_travel
 - クラス名はCapsWordsで書く
   - e.g class Itaewon():
 - 関数やクラスは2行ずつ空ける
@@ -155,15 +181,15 @@ PEP８とは
 
 ---
 #### 他のルール
+
   - 1行の長さは79文字
-  - importの順番
-    - 標準ライブラリ
-      - Pythonが持ってるライブラリ,datetimeとか)
-    - サードパーティライブラリ
-      - pip installしたライブラリ,requestsとか)
-    - 自分のライブラリ
-      - from util import my_function
+  - importの順番は以下のように行い、それぞれアルファベット順にする
+    - 標準ライブラリ(Pythonが持ってるライブラリ,datetimeとか)
+    - サードパーティライブラリ(pip installしたライブラリ,requestsとか)
+    - 自分のライブラリ(from util import my_function)
     -  それぞれアルファベット順にする
+  - コメントが2つ以上の文からなる場合、終わりのピリオドの後は、二つスペースを入れる
+    - ただし、最後の文を除く。
 
 ---
 
@@ -171,14 +197,18 @@ PEP８とは
 
 ---
 
-- 機械にチェックしてもらいましょう
+- 辛いことは機械にやってもらいましょう 
 
 ---
 
-##### 測りたいもの
-  - 未使用変数
-  - PEP８とのチェック
-  - コードの複雑さ  
+- ここでみなさんおなじみのflake8の登場です
+
+---
+flake8とは
+  - Flake8は以下のライブラリのラッパーツール:
+    - PyFlakes
+    - pycodestyle
+    - Ned Batchelder's McCabe script
 
 ---
 
@@ -191,9 +221,10 @@ pyflakes
 ./001_ GuiltyCode.py:2:1 'this' imported but unused
 ./001_ GuiltyCode.py:5:5 local variable 'aaaaaaa' is assigned to but never used
 ```
-
 ---
+
 pycodestyle
+
  - コードチェック
  - 改行とか空白の位置とかをチェック
 
@@ -208,6 +239,9 @@ pycodestyle 001_\ GuiltyCode.py
 001_ GuiltyCode.py:14:23: W292 no newline at end of file
 ```
 ---
+
+
+
 mccabe 
   - 複雑さをチェックする
 
@@ -282,14 +316,62 @@ flake8 --max-complexity 5 002_complex_code.py
  - pythonにはPEP8という指針がある
  - 規約を守らせるためにflake8というライブラリを入れるとコードチェックできる
 ---
+・・といきたいのですが
+
+---
+こちらをご覧下さい
+
+[guilty_code2.py]
+```
+class itaewon():
+    def Method():
+        return ""
+```
+```
+% flake8 006_gilry_code2.py
+%
+```
+---
+お気づきでしょうか？
+
+---
+
+PEP８に印されたエラーが出ていない！
+```
+class itaewon(): ☆　class名はCapWords Iteawon!
+    def Method(): ☆ メソッド名はlower_case!
+        return ""
+```
+---
+
+対処: pep8-naming というライブラリを入れるとこの辺もチェックしてくれます
+
+- `pip install　pep8-nameing`　して 今まで通りflake8するだけ
+
+N系(naming?)系のエラーが増える(他のエラーは省略)
+```
+% flake8 006_gilry_code2.py
+006_gilry_code2.py:1:8: N801 class name 'itaewon' should use CapWords convention
+006_gilry_code2.py:2:10: N802 function name 'Method' should be lowercase
+```
+
+---
+まとめ
+ - pythonにはPEP8という指針がある
+ - 規約を守らせるためにflake8というライブラリを入れるとコードチェックできる
+ - pep8-namingというライブラリを入れると命名規則もチェックしてくれる
+
+---
+
 息抜き
 
 ---
-flake8は進化する！
+
+本当にあった怖い話し(終刊実話)
 
 ---
 
-### flake8を最新化したら突然エラーになることがある！(週刊実話)
+変更していない箇所なのにciがエラーを吐くようになった！
 
 ---
 
@@ -335,14 +417,17 @@ error XXXX
 
 ----
 
-:sub:
+
+#### 😭
 
 ---
 
-誰か代わりに直してよ
+手動チェック辛い・・・・
 
 ---
+
 formatterでformatしよう
+
 ---
 ググると出てくるライブラリ
 - black: スター数 17.1K(2020/08/15)
@@ -354,11 +439,11 @@ formatterでformatしよう
 
 ---
 
-だいたいblackでOKという記事がでてくる
+最近だとblackでOKという記事がでてくる
 
 ---
 
-blackってどんなライブラリ？特徴は？歴史は？他との比較は？彼氏は？調べてみました！
+とりあえずblackという方も多いはず(かくいう私も...
 
 ---
 
@@ -395,6 +480,7 @@ income = (3
 ### 対策
 
 とりあえずflake8からエラーを除外すればOK(公式に書かれた記載を転載)
+
 ```
 [flake8]
 max-line-length = 80
@@ -407,8 +493,38 @@ ignore = E203, E501, W503
 
 ### yapf
 
-- google製のフォーマッター
+- google製のFormatter
 - PEP8に準拠したコードが正しいとは限らない
 - end all holy wars about formatting
-- 日本語訳:フォーマットに関する全ての聖戦を終わらせる
-- 
+  - フォーマットに関する全ての聖戦を終わらせる
+- やたら細かく設定できる
+
+---
+### 設定方法
+
+```
+[yapf]
+based_on_style = pep8/google/yapf/facebook
+spaces_before_comment = 4
+split_before_logical_operator = true
+```
+
+- 58項目ぐらい設定できる
+  -　インデントの数
+  - 文末のセミコロンを許可するか
+  -  等々・・・
+----
+#### 使い方
+
+`yapf --i --style='{DISABLE_ENDING_COMMA_HEURISTIC=True}' src/005_yapf_sample.py`
+
+```
+one = "two";
+```
+↓↓↓
+```
+one = "two"
+```
+----
+
+#### autopep
