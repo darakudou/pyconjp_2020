@@ -1,6 +1,8 @@
 import sys
+import this
 
 def translationCall(Input):
+    aaaaaaa = Input
     if Input == "虎":
         return "tiger" 
     if Input == "火":

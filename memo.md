@@ -83,3 +83,69 @@ formatterの調査
 タイトルの元ネタは全部冴えカノでいく
 how to raise a boring code
 冴えないコードの育て方  
+
+
+Question
+
+---
+ #### which is correnct?
+
+```
+if (condition)
+ {
+   …
+}
+```
+
+```
+if (condition){
+  …
+}
+```
+---
+
+Can't choose!✋
+
+---
+collect!✋
+
+```
+if (condition)
+ {
+   …
+}
+```
+
+---
+
+collect!✋
+```
+if (condition){
+  …
+}
+```
+
+---
+> 「本質的な選択肢」であり、十分に「深い仮説がある」問題でありながら、よいイシューではない、というものが存在する。
+> それは、明確な答えを出せない問題だ。
+
+> 安宅和人. イシューからはじめよ  知的生産の「シンプルな本質」 (Japanese Edition) (Kindle の位置No.687-689). Kindle 版. 
+---
+
+
+## this is not issue!
+
+```
+if (condition)
+ {
+   …
+}
+```
+
+ or 
+
+```
+if (condition){
+  …
+}
+```

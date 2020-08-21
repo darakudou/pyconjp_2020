@@ -1,3 +1,18 @@
 - pepについて
 
 https://docs.pyq.jp/column/python.html
+
+
+https://www.youtube.com/watch?v=esZLCuWs_2Y&feature=youtu.be
+Life Is Better Painted Black, or: How to Stop Worrying and Embrace Auto-Formatting
+
+コードを読むのは大変
+
+code is much more ready than written much more often read than written so that includes code review right so tha code style
+that you have should accelerate code review and not slow it down so it should decrease  the tound trip between the author of the change and between
+
+レビュアーはロジックと背後のコード
+
+from style guide to code style
+
+十分に優れた均一なフォーマットスタイルは、ローカルでより優れているが一貫性のない多くの異なるフォーマットよりも優れています。
