@@ -567,6 +567,27 @@ one = "two"
 
 ---
 
-ちなみにこの話は雑誌には載っていません!
+pre-commitとは・・・・
+ - gitフックスクリプト
+ - コミット毎にフックを実行
+   - セミコロンの欠落や末尾の空白などのコードの問題を自動的に指摘
+
+---
+使い方
+- .pre-commit-config.yamlを用意してその中に実行したい内容を書く
+
+```
+pos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/psf/black
+    rev: statble 
+    hooks:
+    -   id: black
+```
 
 ---
