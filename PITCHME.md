@@ -1,6 +1,5 @@
 
 #### チーム開発時にやっておいたほうが良いこと
-#### 〜how to raise a Boring source code〜
 #### Yuuki Nakajima
 
 ---
@@ -12,33 +11,56 @@
  - とりあえずblackしてる人(よく分かってない)
 
 ---
-#### チーム開発の流れ
 
-  - ソースを書く 
-  - レビューする
-  - マージされる
-  - リリースされる
-  - 機能追加される 
-  - レビューする
-  - マージされる
-  - リリースされる
-  - 機能追加される 
-  - ∞
-  - サービスが終了する
-  
+QUESTION
+
+----
+
+ - 〇〇(任意の嫌な思い出のある言語名)の仕事をもうしたくない!
+ - I don't want work for ***(any program what you hate!) anymore!
+
 ---
 
-### 全体はちょっとずつ綻んでいく
+挙手して下さい
+
+please raise your hands ✋
+
+---
+
+心の中で!
+only in your heart !
+
+---
+
+あなたがその言語を嫌いなのはまともに管理されていないひどいコードに関わったせいはありませんか?
+
+---
+
+よく知らない人がよく分からないまま書いたコードは往々にしてひどいものになるのでは？(経験談)
+
+---
+
+- 懸念点
+  - Pythonが流行る
+  - よく知らないけどPythonでやってみようぜ！案件が出てくる
+  - ひどいコードが増える(経験談)
+  - ひどいコードを引き取ってしまう
+  - Pythonの仕事はもうしたくない！
+
+---
+
+- バベルの塔は何故崩壊したのか？
+  - 作っている人どうしで言葉が通じなくなったから  
 
 ![alt](assets/babel.jpg)
 
 ---
 
-プロジェクト全体として一貫性を持たせることがチーム開発では必要
+- プロジェクト全体としてスタイルの一貫性を持たせることが大事!
 
 ---
 
-ここで話すこと
+- ここで話すこと
  - ソースコードを整えるための規約の紹介
  - チェックするライブラリの紹介
  - ソースを勝手に直してくれるformatterの紹介 
@@ -49,52 +71,50 @@
 
 ----
 
-だいたい雑誌に書かれてしまった！
+だいたい雑誌に書かれてます
 
 ![alt](assets/image_000_web_db_press.jpg)
 
-> 現場のPython ── システム開発も！ 機械学習も！
->【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定
+> 現場のPython ── システム開発も！ 機械学習も！<br>
+>【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定<br>
 > https://www.fujisan.co.jp/product/1281680264/new/
 
 ---
 
-とりあえずやりたいことはここを読めばOK
+あと去年のPyCon JP 2019でも・・・・
+
+- Python開発を円滑に進めるためのツール設定
+https://pycon.jp/2019/schedule?sessionId=151
 
 ---
 
 ### ちょっと違う部分
 - formatterのautppep8/yapfの紹介
 - blackについてもう少し細かい紹介
+- 個人的興味としてとりあえずblackって正しいの？
 - pre-commitの紹介
 
 ---
 
 #### 目次
-- 0.開発環境について
-- Ⅰ.冴えないコードの防ぎ方
   - コード規約PEP8とは？
   - flake8でソースをチェック
-- Ⅱ.冴えたコードの維持の仕方
   - formatterによるcheck
   - とりあえずblackは正しいのか？
     - AutoPep, yapf, blackの比較
   - pre-commitで自動適応
   - 他のライブラリ紹介
 ---
-開発に入る前に：チーム開発をする上での開発環境について
+### お前誰よ
 
-- よく分からなければvenvによる仮想環境でOK
-- poetyryとかpipenvとかもある
-  - 最初はvenvにしておく方が無難
-- その辺は後からまぁどうとでもなる 
-
----
-
-# Ⅰ.冴えないコードの防ぎ方
+- Nakajimayuuki
+- Python歴3年10ヶ月ぐらい？
+- Django(DjangoRestFramework)
+- AWS
+- 必要なことはググりながらなんとかしようとするタイプ
+- 自分の映った写真がチェキしかなく肖像権に触れるため写真ありません
 
 ---
-
 ### 罪深きコードの例
 
 [001_spam_restaurant.py]
@@ -111,8 +131,7 @@ if __name__ == "__main__":
     orderdMenu = OrderMenu(Input);
     print(orderdMenu)
 ```
-
-
+正しく動作する
 ```
 % python src/001_spam_restaulant.py egg
 spam, egg, spam and spam!
@@ -145,8 +164,8 @@ PEPは、Pythonコミュニティに情報を提供するか、Pythonまたは�
 ---
 
 PEPの例
-PEP11
-# Removing support for little used platforms
+- PEP11
+- Removing support for little used platforms
 
 ```
 Name: MS-DOS, MS-Windows 3.x
@@ -158,20 +177,21 @@ https://www.python.org/dev/peps/pep-0011/
 windows3.1ではpython2.0でサポートを切られたことが分かる
 
 ---
-PEP８とは
 
-- PEPで提案されたコード規約
+PEP８とは
+- Style Guide for Python Code 
+
+- あくまでStyle Guideなので文法ではない
 
 ---
 #### PEP8の紹介 
 
 - 一貫性にこだわりすぎるのは、狭い心の現れである
+- インデントにはスペース４つを使いましょう
 - 関数の名前は小文字で単語はアンダースコア(_)で繋ぐ
   - e.g goto_travel
 - クラス名はCapsWordsで書く
   - e.g class Itaewon():
-- 関数やクラスは2行ずつ空ける
-- メソッドは1行空ける
 - 括弧の初めの直後と終わりの直前に空白を入れない
 
 - 日本語で読める
@@ -186,6 +206,8 @@ PEP８とは
     - それぞれアルファベット順にする
   - コメントが2つ以上の文からなる場合、終わりのピリオドの後は、二つスペースを入れる
     - ただし、最後の文を除く。
+  - 関数やクラスは2行ずつ空ける
+  - メソッドは1行空ける
 
 ---
 
@@ -276,7 +298,7 @@ if __name__ == "__main__":
 インストール方法
 ```
 pip install flake8
-pip install　pep8-nameing   # namingのチェックにはこれが必要
+pip install pep8-nameing   # namingのチェックにはこれが必要
 ```
 
 ---
@@ -306,7 +328,7 @@ src/002_complex_code.py:2:1: C901 'order' is too complex (6)
 →messageが消えた！
 
 ---
-
+使い方④
 
 - 設定ファイルに書き出す
 - プロジェクトのトップレベルに設定を書き出す
@@ -314,33 +336,36 @@ src/002_complex_code.py:2:1: C901 'order' is too complex (6)
 
 - 参考
 
-
-.flake8
+.flake8 を追加
 ```
 [flake8]
 ignore F401,E302,N802,F841,W291,E305,E221,N816,E703,W292,N803
-exclude = .git,__pycache__,docs/source/conf.py,old,build,dist
+exclude = .git,__pycache__,.pyc
 max-complexity = 10
 ```
+
 ```
 % flake8 src/001_spam_restaulant.py
 ```
 
+
 ---
 
 - エラーコードの一覧
-
 https://flake8.pycqa.org/en/latest/user/error-codes.html
 
-# pycodestyleのもの
+- pycodestyleのもの
 https://pep8.readthedocs.io/en/latest/intro.html#error-codes
+
+- pep8-naming
+https://pypi.org/project/pep8-naming/
 
 ---
 
 #### まとめ
  - pythonにはPEP8という指針がある
  - flake8というライブラリを入れるとコードチェックできる
- - pep8-namingというライブラリを入れると命名規則もチェック
+ - pep8-namingというライブラリも一緒に入れると命名規則もチェック
 
 ---
 
@@ -374,6 +399,11 @@ if __name__ == "__main__":
     print(order_menu(input))
 ```
 
+---
+
+おわかりでしょうか？
+
+---
  - f"XX" は確かに"XX"と同じなので無意味
  - pycodestyleではこの書き方は検知されていなかった
  - pyflakesの2.2.0(Apr 10,2020)からこれをチェックするようになった 
@@ -381,6 +411,14 @@ if __name__ == "__main__":
 
 ---
 
+- ciで動かすときはflake8のバージョンを固定した方がいいかも？
+- 直すのが正しいのですが・・・
+
+---
+
+話を戻します
+
+---
 これでソースのチェックはOK
 
 ----
@@ -389,11 +427,40 @@ if __name__ == "__main__":
 
 ---
 
-## formatterでformatしよう
+### formatterでformatしよう
 
 ---
 - formaterとは
   - ソースをフォーマットしてくれるライブラリ 
+
+---
+
+— コードを良い感じに直してくれる
+- どこで改行すればいいかとか引数が多いときとかに悩まなくて済む
+
+
+```
+count = get_spanish_inquisition_weapons_count("fear", "surprise", "ruthless efficiency", "fanatical devotion to the Pope", "nice red uniforms"):
+
+def get_spanish_inquisition_weapons_count(*args):
+    return len(*args) - 1 
+```
+
+↓　良い感じに改行してくれる(blackでの例)
+
+```
+count = get_spanish_inquisition_weapons_count(
+    "fear",
+    "surprise",
+    "ruthless efficiency",
+    "fanatical devotion to the Pope",
+    "nice red uniforms",
+)
+
+
+def get_spanish_inquisition_weapons_count(*args):
+    return len(*args) - 1
+```
 
 ---
 ググると出てくるライブラリ
@@ -415,7 +482,7 @@ if __name__ == "__main__":
 
 ---
 
-#### 使い方①
+使い方①
 
 `pip install autopep8`
 
@@ -424,7 +491,7 @@ if __name__ == "__main__":
 `autopep8 --in-place src/004_autopep_sample.py`
 ----
 
-#### 使い方②
+使い方②
 
 --agressiveオプションをつけると修正内容が増える
 
@@ -488,9 +555,11 @@ one = "two"
 - 今(2020/8/2のバージョンは19.10b0
 - まだベータ版とは書いてあるが大きな変更は予定されていない
 - 妥協のないpythonコードフォーマッター
-- 手動フォーマットを全てblackに譲ることになる
 - フォーマットで悩むことがなくなる
-- Python3.6以降のみ
+- 色を持たせない(すべて黒で染め上げる)
+- install出来るのはPython3.6以降の環境のみ
+- 指定すれば2系のコードもチェックできるらしい(未確認）
+  - install出来るのはPython3.6以降の環境のみ
 
 ---
 #### 使い方①
@@ -504,40 +573,57 @@ one = "two"
 
 - ファイルの除外
 - １行の最大値の設定
-- 
-
+- pythonのバージョン指定
 
 ---
-### 
 
-とりあえずflake8からエラーを除外すればOK(公式に書かれた記載を転載)
+- blackをかけてもflake8を通らないチェックがある
+- flake8からエラーを除外すればOK(blackの公式より))
 
 ```
 [flake8]
-max-line-length = 80
-...
-select = C,E,F,W,B,B950
+max-line-length = 90 
 ignore = E203, E501, W503
 ```
 
 ---
 
+005_conflict_black_flake8
+```
+# E203 Whitespace before ':'
+name_lists = ["tarou", "hanako", "ichitarou", ""]
+a = name_lists[1 + 1 :]
 
----
+# E501 line too long (XX > 79 characters)
+name = "jyugemujyugemu gokounosurikire kaijyarisuigyono suigyoumatu unnkoumatu."
+
+# W503 line break before binary operator
+income = (3
+          + 4)
+```
+
 ----
 
 まとめ
-- formatterには大きく３つある
+- formatterには有名どことで３つある
  - black
     - フォーマットの設定が指定できないようにすることでかえって細かい論争を封じ込める
- - yapppf
+ - yapf
     − 細かい設定を充実させることで、プロジェクト毎に任意の設定を作れるようにする
- - autopep
-    - pep8という原典に従うことを是としたライブラリ
-      - 設定は３段階で行うことが出来る
+ - autopep8
+    - pep8に従うことを是としたライブラリ
+      - 設定は細かく行うことが出来る
 
 ---
+### コラム
 
+- 1行の長さはなにが正しいのだろうか?
+  - PEP8: 79文字 
+  - black: 88文字(defautl)
+  - yapf: 80文(defautl)
+  - autopep8: 79文字
+
+---
  pre-commitでformatterを自動的に動かそう
 
  ---
@@ -593,10 +679,11 @@ pos:
 まとめ
 - pre-commitでコミットタイミングでblacｋやその他のツールを動かせる
 - 設定しておくと忘れないのでやっておきましょう
-
+- ciとかでもいいとは思う
 
 ---
 
+- おまけ
 既存のプロジェクトにblackをかけたらどうなっちゃうの？
 
 - 業務で使っている某スマホアプリのバックエンド（Django)
@@ -612,8 +699,23 @@ All done! ✨ 🍰 ✨
 ```
 
 差分のほとんどはmigratefileでシングルクォートをダブルクォートへの変換部分
-
-実は今からでも入れられるのでは？？
+flake8でコードの一貫性が保たれたコードならformatterを導入しても良さそう
 
 ---
 
+- その辺りをチェックできていなければ？？
+
+- あまり考えたくないですね。。。　
+
+---
+
+早い段階からflake8&formatter&pre-commitでPythonコードの保守の安定化を進めましょう！
+
+---
+
+Excelsior！(常に向上を！)
+
+---
+
+
+-QA

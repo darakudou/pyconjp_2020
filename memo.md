@@ -155,18 +155,5 @@ blackを通してもflake8は通らないものがある！
 
 ---
 
-004_conflict_black_flake8
-```
-# E203 Whitespace before ':'
-name_lists = ["tarou", "hanako", "ichitarou", ""]
-a = name_lists[1 + 1 :]
 
-# E501 line too long (XX > 79 characters)
-name = "jyugemujyugemu gokounosurikire kaijyarisuigyono suigyoumatu unnkoumatu."
-
-# W503 line break before binary operator
-income = (3
-          + 4)
-```
-
----
+https://www.slideshare.net/aodag/python-172432039
