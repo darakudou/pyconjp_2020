@@ -149,3 +149,11 @@ if (condition){
   …
 }
 ```
+
+
+blackを通してもflake8は通らないものがある！
+
+---
+
+
+https://www.slideshare.net/aodag/python-172432039

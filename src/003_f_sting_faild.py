@@ -1,11 +1,10 @@
+import sys
 
-
-def translation(input):
-    if input == "虎":
-        return "tiger"
-    return "jya-jya-"
-
+def order_menu(menu):
+    if menu in ["egg", "bacon", "baked bean"]:
+        return f"spam,{menu}, spam and spam!"
+    return f"spam, spam, spam, spam, spam and spam"
 
 if __name__ == "__main__":
-    output = translation(f"虎")
-    print(output)
+    input  = sys.argv[1]
+    print(order_menu(input))
