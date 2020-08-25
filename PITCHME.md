@@ -1,4 +1,9 @@
 
+このスライドのURL
+https://gitpitch.com/darakudou/pyconjp_2020
+
+---
+
 #### チーム開発時にやっておいたほうが良いこと
 #### Yuuki Nakajima
 
@@ -6,7 +11,6 @@
 #### 対象
  
  - これからチーム開発を始めようという人
- - ソースコードはきれいに保ちたい人
  - とりあえずflake8してる人(よく分かってない) 
  - とりあえずblackしてる人(よく分かってない)
 
@@ -23,7 +27,7 @@ QUESTION
 
 挙手して下さい
 
-please raise your hands ✋
+raise your hands please ✋
 
 ---
 
@@ -32,7 +36,7 @@ only in your heart !
 
 ---
 
-あなたがその言語を嫌いなのはまともに管理されていないひどいコードに関わったせいはありませんか?
+あなたがその言語を嫌いなのはひどいコードに関わってひどい目にあったせいはありませんか?
 
 ---
 
@@ -40,10 +44,9 @@ only in your heart !
 
 ---
 
-- 懸念点
-  - Pythonが流行る
+- pythonの流行と共に起きうる懸念
   - よく知らないけどPythonでやってみようぜ！案件が出てくる
-  - ひどいコードが増える(経験談)
+  - ひどいコードが増える(終刊実話)
   - ひどいコードを引き取ってしまう
   - Pythonの仕事はもうしたくない！
 
@@ -61,9 +64,12 @@ only in your heart !
 ---
 
 - ここで話すこと
- - ソースコードを整えるための規約の紹介
- - チェックするライブラリの紹介
- - ソースを勝手に直してくれるformatterの紹介 
+  - ソースコードを整えるための規約の紹介
+  - チェックするライブラリの紹介
+  - ソースを勝手に直してくれるformatterの紹介 
+
+- ここでは話さないこと
+  - 設計レベルでの一貫性や可読性の話し
 
 ---
 
@@ -77,11 +83,12 @@ only in your heart !
 
 > 現場のPython ── システム開発も！ 機械学習も！<br>
 >【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定<br>
-> https://www.fujisan.co.jp/product/1281680264/new/
+
+https://www.fujisan.co.jp/product/1281680264/b/1987343/
 
 ---
 
-あと去年のPyCon JP 2019でも・・・・
+あと去年のPyCon JP 2019でも類似の話題があります
 
 - Python開発を円滑に進めるためのツール設定
 https://pycon.jp/2019/schedule?sessionId=151
@@ -89,10 +96,14 @@ https://pycon.jp/2019/schedule?sessionId=151
 ---
 
 ### ちょっと違う部分
-- formatterのautppep8/yapfの紹介
-- blackについてもう少し細かい紹介
-- 個人的興味としてとりあえずblackって正しいの？
+- formatterのautopep8/yapfの紹介
+- とりあえずblackって正しいの？
 - pre-commitの紹介
+
+---
+
+結論；
+よく分からなければ pre-commitでblackを動かしてflake8でチェックすればOK
 
 ---
 
@@ -107,12 +118,13 @@ https://pycon.jp/2019/schedule?sessionId=151
 ---
 ### お前誰よ
 
-- Nakajimayuuki
+- Yuuki Nakajima 
 - Python歴3年10ヶ月ぐらい？
 - Django(DjangoRestFramework)
 - AWS
-- 必要なことはググりながらなんとかしようとするタイプ
-- 自分の映った写真がチェキしかなく肖像権に触れるため写真ありません
+- 必要なことはググりながら泥縄でなんとかしようとするタイプ
+- 自分の映った写真がチェキしかないので公開できる写真ありません
+
 
 ---
 ### 罪深きコードの例
@@ -131,11 +143,27 @@ if __name__ == "__main__":
     orderdMenu = OrderMenu(Input);
     print(orderdMenu)
 ```
-正しく動作する
+
+---
+
+- このコードにはぱっと見で9つの罪がある
 ```
+import sys
+import datetime ← ①未使用import
+　　②　空白行数
+def OrderMenu(menuName): ← ③関数名、引数名
+    return f"spam, {menuName}, spam and spam!"
+ ④ 空白行数
+if __name__ == "__main__":
+    guets = "Viking" ←　⑤未使用変数
+    Input = sys.argv[1] ←⑦変数名
+    orderdMenu = OrderMenu(Input); ←⑧セミコロン
+    print(orderdMenu)
+```
+
+⑨正しく動作する
 % python src/001_spam_restaulant.py egg
 spam, egg, spam and spam!
-```
 
 ---
 
@@ -155,11 +183,13 @@ https://www.python.org/dev/peps/pep-0001/#id34
 >What is a PEP?
 PEP stands for Python Enhancement Proposal.<br>
 
-PEPとはPython改良提案を意味する語の頭文字を取ってPEP
+>PEPとはPython改良提案を意味する語の頭文字を取ってPEP
 
 >A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.<br>
 
-PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
+>PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
+
+
 
 ---
 
@@ -182,9 +212,13 @@ PEP８とは
 - Style Guide for Python Code 
 
 - あくまでStyle Guideなので文法ではない
+- 遵守しなくても動く
 
 ---
 #### PEP8の紹介 
+
+- 日本語で読める
+  - https://pep8-ja.readthedocs.io/ja/latest/
 
 - 一貫性にこだわりすぎるのは、狭い心の現れである
 - インデントにはスペース４つを使いましょう
@@ -194,11 +228,8 @@ PEP８とは
   - e.g class Itaewon():
 - 括弧の初めの直後と終わりの直前に空白を入れない
 
-- 日本語で読める
-  - https://pep8-ja.readthedocs.io/ja/latest/
-
 ---
-#### 他のルール
+#### 他のガイド
 
   - 1行の長さは79文字
   - importの順番
@@ -211,10 +242,13 @@ PEP８とは
 
 ---
 
-## この辺まで意識するのは辛い！
+### この辺まで意識するのは辛い！
 
 ---
 
+辛いのでライブラリにチェックしてもらいましょう
+
+---
 ### flake8: コードをチェックしてくれるライブラリ
   - Flake8は以下のライブラリのラッパーツール:
     - PyFlakes
@@ -227,6 +261,11 @@ PEP８とは
 
 - コードチェックimportのみライブラリや未使用変数をチェック
 
+```
+imaport datetime 
+
+guests = "Vaiking"
+```
 ```
 % pyflakes src/001_spam_restaulant.py
 src/001_spam_restaulant.py:2:1 'datetime' 
@@ -351,13 +390,13 @@ max-complexity = 10
 
 ---
 
-- エラーコードの一覧
+- エラーコードの一覧<br>  
 https://flake8.pycqa.org/en/latest/user/error-codes.html
 
-- pycodestyleのもの
+- pycodestyleのもの<br>
 https://pep8.readthedocs.io/en/latest/intro.html#error-codes
 
-- pep8-naming
+- pep8-naming<br>>
 https://pypi.org/project/pep8-naming/
 
 ---
@@ -381,7 +420,8 @@ https://pypi.org/project/pep8-naming/
 
 ---
 
-なにもしてないのにソースが壊れた(ciに通らなくなった)
+なにもしてないのにコードが壊れた
+ - (ciに通らなくなった)
 
 ---
 
@@ -404,15 +444,21 @@ if __name__ == "__main__":
 おわかりでしょうか？
 
 ---
+
+`return f"spam, spam, spam, spam, spam and spam"`
+
+---
+
  - f"XX" は確かに"XX"と同じなので無意味
  - pycodestyleではこの書き方は検知されていなかった
  - pyflakesの2.2.0(Apr 10,2020)からこれをチェックするようになった 
  - その結果ある日突然ソースが落ちる自体に！！！
+ - ciでは常に最新のflake8を落としていたために起きた悲劇
 
 ---
 
 - ciで動かすときはflake8のバージョンを固定した方がいいかも？
-- 直すのが正しいのですが・・・
+- 急ぎでなければ直すのが正しい(あるべき論)
 
 ---
 
@@ -435,9 +481,11 @@ if __name__ == "__main__":
 
 ---
 
-— コードを良い感じに直してくれる
-- どこで改行すればいいかとか引数が多いときとかに悩まなくて済む
+- コードを良い感じに直してくれる
+   - どこで改行すればいいか
+   - うっかり入れてしまった空白とか 
 
+---
 
 ```
 count = get_spanish_inquisition_weapons_count("fear", "surprise", "ruthless efficiency", "fanatical devotion to the Pope", "nice red uniforms"):
@@ -463,6 +511,7 @@ def get_spanish_inquisition_weapons_count(*args):
 ```
 
 ---
+
 ググると出てくるライブラリ
 - black: スター数 17.1K(2020/08/15)
   - https://github.com/psf/black
@@ -472,7 +521,7 @@ def get_spanish_inquisition_weapons_count(*args):
   - https://github.com/hhatto/autopep8
 
 ---
-#### autopep
+#### autopep8
 
 - pep8のスタイルガイドに準拠したフォーマッター
 - pycodestyleを使っている
@@ -486,8 +535,8 @@ def get_spanish_inquisition_weapons_count(*args):
 
 `pip install autopep8`
 
---inplace オプションをつけるとファイルを修正する
-  - 空白に関する修正のみ
+- --inplaceオプションをつけてファイルを修正する
+- 基本は空白に関する修正のみ
 `autopep8 --in-place src/004_autopep_sample.py`
 ----
 
@@ -498,7 +547,7 @@ def get_spanish_inquisition_weapons_count(*args):
 `autopep8 --in-place --agressive src/004_
 autopep_sample.py`
 
---agressiveオプションを2つつけると修正内容が増える
+--agressiveオプションを2つつけると修正内容がもっと増える
 
 `autopep8 --in-place --agressive --agressive
  src/004_autopep_sample.py`
@@ -532,10 +581,12 @@ split_before_logical_operator = true
 ```
 
 - 58項目ぐらい設定できる
-  -　インデントの数
+  - インデントの数
   - 文末のセミコロンを許可するか
   -  等々・・・
+
 ----
+
 #### 使い方
 
 `yapf --i --style='{DISABLE_ENDING_COMMA_HEURISTIC=True}' src/005_yapf_sample.py`
@@ -547,16 +598,13 @@ one = "two";
 ```
 one = "two"
 ```
-
 ---
 
-## black
+### black
 
-- 今(2020/8/2のバージョンは19.10b0
-- まだベータ版とは書いてあるが大きな変更は予定されていない
+- まだベータ版とは書いてあるが大きな変更は予定されていないとのこと
 - 妥協のないpythonコードフォーマッター
-- フォーマットで悩むことがなくなる
-- 色を持たせない(すべて黒で染め上げる)
+-  yapfのように細かい設定が出来ない
 - install出来るのはPython3.6以降の環境のみ
 - 指定すれば2系のコードもチェックできるらしい(未確認）
   - install出来るのはPython3.6以降の環境のみ
@@ -624,15 +672,25 @@ income = (3
   - autopep8: 79文字
 
 ---
- pre-commitでformatterを自動的に動かそう
+
+- 個人的には大きいディスプレイで見るなら90文字以上あってもいいが
+- ノートブックだけだと80文字ぐらいが見やすいかも
+- やっぱり79文字は少ない気がする
+
+---
+
+本編に戻ります
+
+---
+pre-commitでformatterを自動的に動かそう
 
  ---
 
- formatterが決まったことで、細かいルールも決まりました
+formatterが決まったことで、細かいルールも決まりました
 
  ---
 
- でも、選んだファイルをformatterにかけ忘れてcommit & pushしてしまったら？
+でも、選んだファイルをformatterにかけ忘れてcommit & pushしてしまったら？
 
 ---
 
@@ -693,19 +751,15 @@ pos:
 
 →何も考えずに手元でblack
 
+---
+
 ```
 All done! ✨ 🍰 ✨
 429 files reformatted, 786 files left unchanged.
 ```
 
-差分のほとんどはmigratefileでシングルクォートをダブルクォートへの変換部分
-flake8でコードの一貫性が保たれたコードならformatterを導入しても良さそう
-
----
-
-- その辺りをチェックできていなければ？？
-
-- あまり考えたくないですね。。。　
+- 差分のほとんどはmigratefileでシングルクォートをダブルクォートへの変換部分
+- flake8でコードの一貫性が保たれたコードならformatterを導入してもいけそう
 
 ---
 
@@ -713,9 +767,14 @@ flake8でコードの一貫性が保たれたコードならformatterを導入�
 
 ---
 
-Excelsior！(常に向上を！)
+## Excelsior！
+
+-- 常に向上を！
 
 ---
 
+### the end
 
--QA
+---
+
+- QA
