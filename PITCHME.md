@@ -84,9 +84,10 @@ only in your heart !
 ![alt](assets/image_000_web_db_press.jpg)
 
 
-@snap[text-blue text-06]
-> 現場のPython ── システム開発も！ 機械学習も！<br>
->【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定<br>
+@snap[text-06]
+> 現場のPython ── システム開発も！ 機械学習も！
+@snap[text-06]
+>【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定
 
 
 @snap[text-blue text-06]
