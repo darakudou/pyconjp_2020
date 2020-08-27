@@ -42,11 +42,11 @@ only in your heart !
 
 よく知らない人がよく分からないまま書いたコードは往々にしてひどいものになるのでは？
 @snap[text-blue text-06]
-#実話、#今でも申し訳ないと思ってる #拡散希望 #拡散した人全員ブロック
+#実話 #今でも申し訳ないと思ってる #拡散希望 #拡散した人全員ブロック
 
 ---
 
-- pythonの流行と共に起きうる懸念
+#### pythonの流行と共に起きうる懸念
   - よく知らないけどPythonでやってみようぜ！案件が出てくる
   - ひどいコードが増える(終刊実話)
   - ひどいコードを引き取ってしまう
@@ -86,6 +86,8 @@ only in your heart !
 > 現場のPython ── システム開発も！ 機械学習も！<br>
 >【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定<br>
 
+
+@snap[text-blue text-06]
 https://www.fujisan.co.jp/product/1281680264/b/1987343/
 
 ---
@@ -93,6 +95,7 @@ https://www.fujisan.co.jp/product/1281680264/b/1987343/
 あと去年のPyCon JP 2019でも類似の話題があります
 
 - Python開発を円滑に進めるためのツール設定
+@snap[text-blue text-08]
 https://pycon.jp/2019/schedule?sessionId=151
 
 ---
