@@ -137,8 +137,6 @@ pre-commitでblackを動かしてflake8でチェックする
 
 ###  罪深きコードの例
 
-[001_spam_restaurant.py]
-
 ---?code=src/001_spam_restaulant.py&lang=python
 
 ---
@@ -575,7 +573,7 @@ https://github.com/hhatto/autopep8#features
 
 ---
 
-### 設定方法
+#### 設定方法
 
 ```
 [yapf]
@@ -593,7 +591,11 @@ split_before_logical_operator = true
 
 #### 使い方
 
-`yapf --i --style='{DISABLE_ENDING_COMMA_HEURISTIC=True}' src/005_yapf_sample.py`
+```
+yapf --i --style='
+{DISABLE_ENDING_COMMA_HEURISTIC=True}'
+ src/005_yapf_sample.py`
+```
 
 ```
 one = "two";
@@ -698,13 +700,14 @@ income = (3
 本編に戻ります
 
 ---
+
 pre-commitでformatterを自動的に動かそう
 
- ---
+---
 
 formatterが決まったことで、細かいルールも決まりました
 
- ---
+---
 
 でも、選んだファイルをformatterにかけ忘れてcommit & pushしてしまったら？
 
@@ -772,27 +775,9 @@ src/001_spam_restaulant.py:6:5: F841 local variable 'guests' is assigned to but 
 ---
 
 - pre-commitでblackとautoflakeとflake8をかける方法
-```
-repos:
--   repo: https://github.com/psf/black
-    rev: stable
-    hooks:
-    -   id: black
 
--   repo: https://github.com/humitos/mirrors-autoflake 
-    rev: v1.3 
-    hooks:
-    -   id: autoflake
-        name: autoflake
-        entry: autoflake --remove-all-unused-imports --remove-unused-variables
-        language: python
-        files: \.py$
+---?code=.pre-commit-config.yaml_tmp&lang=yaml
 
-- repo: https://gitlab.com/pycqa/flake8 
-  rev: 3.8.3 
-  hooks:
-    - id: flake8
-```
 ---
 
 ```
