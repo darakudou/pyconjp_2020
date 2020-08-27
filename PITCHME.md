@@ -108,7 +108,7 @@ https://pycon.jp/2019/schedule?sessionId=151
 
 ---
 
-とりあえずこれだけ持ち帰って貰えれば:
+とりあえずこれだけ持ち帰って貰えれば:<br>
 pre-commitでblackを動かしてflake8でチェックする
 
 ---
@@ -141,7 +141,7 @@ pre-commitでblackを動かしてflake8でチェックする
 
 [001_spam_restaurant.py]
 
----?code=src/001_spam_restaurant.py&lang=python
+---?code=src/001_spam_restaulant.py&lang=python
 
 ---
 
