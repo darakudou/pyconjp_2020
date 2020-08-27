@@ -83,10 +83,8 @@ only in your heart !
 
 ![alt](assets/image_000_web_db_press.jpg)
 
-
 @snap[text-06]
-> 現場のPython ── システム開発も！ 機械学習も！
->【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定
+@quote[現場のPython ── システム開発も！ 機械学習も！<br>第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定](web+DBpress vol.117)
 
 @snap[text-blue text-06]
 https://www.fujisan.co.jp/product/1281680264/b/1987343/
@@ -151,14 +149,14 @@ pre-commitでblackを動かしてflake8でチェックする
 @[2](未使用import)
 @[3](空白行数)
 @[4](関数名、引数名)
-@[6](空白行数)
-@[8](未使用変数)
+@[5](未使用変数)
+@[7](空白行数)
 @[9](変数名)
-@[10](セミコロン)
+@[10](変数名、セミコロン)
 
 ---
 
-いや、9つ
+いや、8つ
 ```
 % python src/001_spam_restaulant.py egg
 spam, egg, spam and spam!
