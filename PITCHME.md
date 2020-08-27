@@ -86,9 +86,7 @@ only in your heart !
 
 @snap[text-06]
 > 現場のPython ── システム開発も！ 機械学習も！
-@snap[text-06]
 >【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定
-
 
 @snap[text-blue text-06]
 https://www.fujisan.co.jp/product/1281680264/b/1987343/
@@ -131,47 +129,37 @@ https://pycon.jp/2019/schedule?sessionId=151
 - Django(DjangoRestFramework)
 - AWS
 - 必要なことはググりながら泥縄でなんとかしようとするタイプ
+− このスライドは2020/08/28 2:05+9:00に書いてる
 - 自分の映った写真がチェキしかないので公開できる写真ありません
 
-
 ---
-### 罪深きコードの例
+## 罪深きコードの例
 
 [001_spam_restaurant.py]
-```
-import sys
-import datetime
 
-def OrderMenu(menuName):
-    return f"spam, {menuName}, spam and spam!"
-
-if __name__ == "__main__":
-    guets = "Viking"
-    Input = sys.argv[1]
-    orderdMenu = OrderMenu(Input);
-    print(orderdMenu)
-```
+---?code=src/001_spam_restaurant.py
 
 ---
 
-- このコードにはぱっと見で9つの罪がある
-```
-import sys
-import datetime ← ①未使用import
-　　②　空白行数
-def OrderMenu(menuName): ← ③関数名、引数名
-    return f"spam, {menuName}, spam and spam!"
- ④ 空白行数
-if __name__ == "__main__":
-    guets = "Viking" ←　⑤未使用変数
-    Input = sys.argv[1] ←⑦変数名
-    orderdMenu = OrderMenu(Input); ←⑧セミコロン
-    print(orderdMenu)
-```
+- このコードにはぱっと見で7つの大罪がある
+---?code=src/001_spam_restaurant.py
 
-⑨正しく動作する
+@[2](未使用import)
+@[3](空白行数)
+@[4](関数名、引数名)
+@[6](空白行数)
+@[8](未使用変数)
+@[9](変数名)
+@[10](セミコロン)
+
+---
+
+いや、9つ
+```
 % python src/001_spam_restaulant.py egg
 spam, egg, spam and spam!
+```
+@[1](正しく動作する)
 
 ---
 
@@ -201,7 +189,7 @@ PEP stands for Python Enhancement Proposal.<br>
 
 ---
 
-PEPの例
+###  PEPの例
 - PEP11
 - Removing support for little used platforms
 
@@ -210,6 +198,7 @@ Name: MS-DOS, MS-Windows 3.x
 Unsupported in: Python 2.0
 Code removed in: Python 2.1
 ```
+
 https://www.python.org/dev/peps/pep-0011/
 
 windows3.1ではpython2.0でサポートを切られたことが分かる
@@ -241,8 +230,11 @@ PEP８とは
 
   - 1行の長さは79文字
   - importの順番
-    - 標準ライブラリ、サードパーティライブラリ、自分のモジュール
+    - 標準ライブラリ
+    - サードパーティライブラ
+    - 自分のモジュール
     - それぞれアルファベット順にする
+
   - コメントが2つ以上の文からなる場合、終わりのピリオドの後は、二つスペースを入れる
     - ただし、最後の文を除く。
   - 関数やクラスは2行ずつ空ける
