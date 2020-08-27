@@ -108,8 +108,8 @@ https://pycon.jp/2019/schedule?sessionId=151
 
 ---
 
-結論；
-よく分からなければ pre-commitでblackを動かしてflake8でチェックすればOK
+とりあえずこれだけ持ち帰って貰えれば:
+pre-commitでblackを動かしてflake8でチェックする
 
 ---
 
@@ -129,15 +129,19 @@ https://pycon.jp/2019/schedule?sessionId=151
 - Django(DjangoRestFramework)
 - AWS
 - 必要なことはググりながら泥縄でなんとかしようとするタイプ
-− このスライドは2020/08/28 2:05+9:00に書いてる
+- このスライドは2020/08/28 2:05+9:00に書いてる
+
+---
+
 - 自分の映った写真がチェキしかないので公開できる写真ありません
 
 ---
-## 罪深きコードの例
+
+###  罪深きコードの例
 
 [001_spam_restaurant.py]
 
----?code=src/001_spam_restaurant.py
+---?code=src/001_spam_restaurant.py&lang=python
 
 ---
 
