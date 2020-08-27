@@ -146,7 +146,7 @@ pre-commitでblackを動かしてflake8でチェックする
 ---
 
 - このコードにはぱっと見で7つの大罪がある
----?code=src/001_spam_restaurant.py
+---?code=src/001_spam_restaulant.py&lang=python
 
 @[2](未使用import)
 @[3](空白行数)
