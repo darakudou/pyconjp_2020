@@ -21,7 +21,7 @@ QUESTION
 ----
 
  - 〇〇(任意の嫌な思い出のある言語名)の仕事をもうしたくない!
- - I don't want work for ***(any program what you hate!) anymore!
+ - I don't want work for XXXX(any program what you hate!) anymore!
 
 ---
 
@@ -31,16 +31,18 @@ raise your hands please ✋
 
 ---
 
-心の中で!
+心の中で!<br>
 only in your heart !
 
 ---
 
-あなたがその言語を嫌いなのはひどいコードに関わってひどい目にあったせいはありませんか?
+- あなたがその言語を嫌いなのはひどいコードに関わってひどい目にあったせいはありませんか?
 
 ---
 
-よく知らない人がよく分からないまま書いたコードは往々にしてひどいものになるのでは？(経験談)
+よく知らない人がよく分からないまま書いたコードは往々にしてひどいものになるのでは？
+@snap[text-blue text-06]
+#実話、#今でも申し訳ないと思ってる #拡散希望 #拡散した人全員ブロック
 
 ---
 
