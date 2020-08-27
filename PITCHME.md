@@ -344,7 +344,7 @@ pip install pep8-nameing   # namingのチェックにはこれが必要
 
 使い方①
 ```
-% flake8 src/001_spam_restaulant.py 
+% flake8 src/001_spam_restaulant.py
 src/001_spam_restaulant.py:2:1: F401 'datetime' imported but unused
 src/001_spam_restaulant.py:4:1: E302 expected 2 blank lines, found 1
 ....
@@ -670,7 +670,7 @@ income = (3
 
  - autflakeをかける
 
-`pip install autflake` 
+`pip install autflake`
 
  `autoflake --in-place --remove-all-unused-imports --remove-unused-variables`
 
@@ -746,6 +746,61 @@ repos:
   hooks:
     - id: flake8
 ```
+---
+
+```
+% git commit -a -m "wip"
+black....................................................................Failed
+- hook id: black
+- files were modified by this hook
+
+reformatted src/001_spam_restaulant.py
+All done! ✨ 🍰 ✨
+1 file reformatted.
+
+Flake8...................................................................Failed
+- hook id: flake8
+- exit code: 1
+
+src/001_spam_restaulant.py:2:1: F401 'datetime' imported but unused
+src/001_spam_restaulant.py:6:5: F841 local variable 'guests' is assigned to but never used
+```
+↑ 直すまで永遠にコミットできない 😭
+
+---
+
+- pre-commitでblackとautoflakeとflake8をかける方法
+```
+repos:
+-   repo: https://github.com/psf/black
+    rev: stable
+    hooks:
+    -   id: black
+
+-   repo: https://github.com/humitos/mirrors-autoflake 
+    rev: v1.3 
+    hooks:
+    -   id: autoflake
+        name: autoflake
+        entry: autoflake --remove-all-unused-imports --remove-unused-variables
+        language: python
+        files: \.py$
+
+- repo: https://gitlab.com/pycqa/flake8 
+  rev: 3.8.3 
+  hooks:
+    - id: flake8
+```
+---
+
+```
+ git commit -a -m "wip"
+black....................................................................Passed
+autoflake................................................................Failed
+- hook id: autoflake
+- files were modified by this hook
+flake8...................................................................Passed
+```
 
 ---
 
@@ -764,7 +819,8 @@ repos:
 
 ---
 
-- おまけ
+おまけ
+
 既存のプロジェクトにblackをかけたらどうなっちゃうの？
 
 - 業務で使っている某スマホアプリのバックエンド（Django)
@@ -797,6 +853,18 @@ All done! ✨ 🍰 ✨
 ---
 
 ### the end
+
+
+---
+補足資料
+
+- web + db press Vol.117
+https://www.fujisan.co.jp/product/1281680264/b/1987343
+
+- リファクタリングツールあれこれ
+https://tell-k.github.io/pyconjp2014/#/
+- もうPythonの細かい書き方で議論しない。blackで自動フォーマットしよう
+https://blog.hirokiky.org/entry/2019/06/03/202745
 
 ---
 
