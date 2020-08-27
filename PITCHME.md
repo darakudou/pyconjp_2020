@@ -528,6 +528,7 @@ def get_spanish_inquisition_weapons_count(*args):
 - pycodestyleにはない問題の修正も行っている
 - aggressiveレベルを指定してそれによって修正内容が異なる
 - Python2.7/Python3.4から使える
+- 未使用importや変数は消してくれない 
 
 ---
 
@@ -568,6 +569,7 @@ https://github.com/hhatto/autopep8#features
   - フォーマットに関する全ての聖戦を終わらせる
 - やたら細かく設定できる
 - Python2.7/Python3.6〜
+- 未使用変数やimportは消してくれない
 
 ---
 
@@ -604,10 +606,10 @@ one = "two"
 
 - まだベータ版とは書いてあるが大きな変更は予定されていないとのこと
 - 妥協のないpythonコードフォーマッター
--  yapfのように細かい設定が出来ない
+- yapfのように細かい設定が出来ない
 - install出来るのはPython3.6以降の環境のみ
 - 指定すれば2系のコードもチェックできるらしい(未確認）
-  - install出来るのはPython3.6以降の環境のみ
+- 未使用変数やimportは消してくれない
 
 ---
 #### 使い方①
@@ -634,6 +636,7 @@ max-line-length = 90
 ignore = E203, E501, W503
 ```
 
+
 ---
 
 005_conflict_black_flake8
@@ -657,12 +660,23 @@ income = (3
  - black
     - フォーマットの設定が指定できないようにすることでかえって細かい論争を封じ込める
  - yapf
-    − 細かい設定を充実させることで、プロジェクト毎に任意の設定を作れるようにする
+    − 細かい設定を充実させることで、プロジェクト毎にどんな設定でも作れるようにする
  - autopep8
     - pep8に従うことを是としたライブラリ
       - 設定は細かく行うことが出来る
 
 ---
+未使用importや未使用変数の消し方
+
+ - autflakeをかける
+
+`pip install autflake` 
+
+ `autoflake --in-place --remove-all-unused-imports --remove-unused-variables`
+
+---
+
+
 ### コラム
 
 - 1行の長さはなにが正しいのだろうか?
@@ -715,7 +729,7 @@ pre-commitとは・・・・
 - .pre-commit-config.yamlを用意してその中に実行したい内容を書く
 
 ```
-pos:
+repos:
 -   repo: https://github.com/psf/black
     rev: statble 
     hooks:
