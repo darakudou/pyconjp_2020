@@ -724,22 +724,32 @@ pre-commitとは・・・・
 
 ---
 使い方
-`pip install pre-commit`
+```
+% pip install pre-commit
+% pre-commit install
+pre-commit installed at .git/hooks/pre-commit
+```
 
-- .pre-commit-config.yamlを用意してその中に実行したい内容を書く
+.pre-commit-config.yamlを用意してその中に実行したい内容を書く
+
+blackとflake8をかけるサンプル
 
 ```
 repos:
 -   repo: https://github.com/psf/black
-    rev: statble 
+    rev: stable
     hooks:
     -   id: black
+
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v2.0.0
+  hooks:
+    - id: flake8
 ```
 
 ---
 
-
-他にも設定した方が良い物
+- 他にも設定した方が良い物
 
 - mypy
   - 引数などの型チェックを行ってくれる
@@ -750,8 +760,7 @@ repos:
 
 まとめ
 - pre-commitでコミットタイミングでblacｋやその他のツールを動かせる
-- 設定しておくと忘れないのでやっておきましょう
-- ciとかでもいいとは思う
+- 設定しておくと忘れないのでやっておくと便利
 
 ---
 
