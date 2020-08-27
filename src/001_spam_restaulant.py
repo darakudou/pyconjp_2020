@@ -2,7 +2,7 @@ import sys
 import datetime
 
 def OrderMenu(menuName):
-    guests = "Viking"  
+    guests = "Viking"   
     return f"spam, {menuName}, spam and spam!"
 
 if __name__ == "__main__":
