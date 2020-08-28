@@ -41,7 +41,7 @@ only in your heart !
 ---
 
 よく知らない人がよく分からないまま書いたコードは往々にしてひどいものになるのでは？
-@snap[text-blue text-06]
+@snap[text-06]
 #実話 #今でも申し訳ないと思ってる #拡散希望 #拡散した人全員ブロック
 
 ---
@@ -81,7 +81,7 @@ only in your heart !
 
 だいたい雑誌に書かれてます
 
-![alt](assets/image_000_web_db_press.jpg)
+---?image=assets/image_000_web_dbpress.jpg&size=auto 50%
 
 @snap[text-06]
 @quote[現場のPython ── システム開発も！ 機械学習も！<br>【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定](web+DBpress vol.117)
@@ -92,7 +92,6 @@ https://www.fujisan.co.jp/product/1281680264/b/1987343/
 ---
 
 - Python開発を円滑に進めるためのツール設定(PyCon JP 2019)
-@snap[text-blue text-08]
 https://pycon.jp/2019/schedule?sessionId=151
 
 - リファクタリングツールあれこれ(PyCon JP 2014)
@@ -126,9 +125,16 @@ https://tell-k.github.io/pyconjp2014/#/
 
 ---
 
-- 自分の映った写真がチェキしかないので公開できる写真ありません
+---?color=linear-gradient(180deg, white 80%, white 20%)
 
+@snap[north span-100]
+- 自分の映った写真がチェキしかないので公開できる写真ありません
+@snapend
+
+
+@snap[south span-100]
 ↑この一文で察した方は是非お話ししましょう
+@snapend
 
 ---
 
@@ -189,10 +195,11 @@ PEPの例
 - PEP11
 - Removing support for little used platforms
 
-
+```
 Name: MS-DOS, MS-Windows 3.x
 Unsupported in: Python 2.0
 Code removed in: Python 2.1
+```
 
 https://www.python.org/dev/peps/pep-0011/
 
@@ -229,6 +236,10 @@ PEP８とは
     - サードパーティライブラ
     - 自分のモジュール
     - それぞれアルファベット順にする
+
+---
+
+#### 他のガイド
 
   - コメントが2つ以上の文からなる場合、終わりのピリオドの後は、二つスペースを入れる
     - ただし、最後の文を除く。
@@ -274,24 +285,18 @@ src/001_spam_restaulant.py:5:5 local variable
 
 ```
 % pycodestyle src/001_spam_restaulant.py
-src/001_spam_restaulant.py:4:1: E302
- expected 2 blank lines, found 1
-src/001_spam_restaulant.py:5:22: W291
- trailing whitespace
-src/001_spam_restaulant.py:8:1: E305
- expected 2 blank lines after class or function definition, found 1
-src/001_spam_restaulant.py:9:10: E221 
-multiple spaces before operator
-src/001_spam_restaulant.py:10:34: E703
- statement ends with a semicolon
-src/001_spam_restaulant.py:11:22: W292
- no newline at end of file
+src/001_spam_restaulant.py:4:1: E302 expected 2 blank lines, found 1
+src/001_spam_restaulant.py:5:22: W291 trailing whitespace
+src/001_spam_restaulant.py:8:1: E305 expected 2 blank lines after class or function definition, found 1
+src/001_spam_restaulant.py:9:10: E221 multiple spaces before operator
+src/001_spam_restaulant.py:10:34: E703 statement ends with a semicolon
+src/001_spam_restaulant.py:11:22: W292 no newline at end of file
 ```
 
 ---
 
 #### mccabe 
-  - 複雑さをチェックする
+  - 複雑度をチェックする
 
 ---?code=src/002_complex_code.py&lang=python
 
@@ -346,7 +351,6 @@ src/002_complex_code.py:2:1: C901 'order' is too complex (6)
 - プロジェクトのトップレベルに設定を書き出す
   - setup.cfg/.flake8/tox.ini等・・・
 
-.flake8 を追加
 ```
 [flake8]
 ignore F401,E302,N802,F841,W291,E305,E221,N816,E703,W292,N803
@@ -363,10 +367,10 @@ max-complexity = 10
 - エラーコードの一覧  
 https://flake8.pycqa.org/en/latest/user/error-codes.html
 
-- pycodestyleのもの
+- pycodestyle<br>
 https://pep8.readthedocs.io/en/latest/intro.html#error-codes
 
-- pep8-naming
+- pep8-naming<br>
 https://pypi.org/project/pep8-naming/
 
 ---
@@ -390,12 +394,11 @@ https://pypi.org/project/pep8-naming/
 
 ---
 
-なにもしてないのにコードが壊れた
- - (ciに通らなくなった)
+なにもしてないのにciが通らなくなった
 
 ---
 
----?code=003_f_string_faild.py
+---?code=src/003_f_string_faild.py&lang=python
 
 ---
 
@@ -403,7 +406,7 @@ https://pypi.org/project/pep8-naming/
 
 ---
 
----?code=src/003_f_string.py&lang=python
+---?code=src/003_f_string_faild.py&lang=python
 
 @[6](ここに注目！)
 ---
@@ -493,12 +496,17 @@ def get_spanish_inquisition_weapons_count(*args):
 
 使い方①
 
-`pip install autopep8`
+```
+pip install autopep8
+```
 
 - --inplaceオプションをつけてファイルを修正する
 - 基本は空白に関する修正のみ
 
-`autopep8 --in-place src/004_autopep_sample.py`
+```
+autopep8 --in-place src/004_autopep_sample.py
+```
+
 
 ----
 
@@ -507,8 +515,7 @@ def get_spanish_inquisition_weapons_count(*args):
 --agressiveオプションをつけると修正内容が増える
 
 ```
-autopep8 --in-place --agressive src/004_
-autopep_sample.py
+autopep8 --in-place --agressive src/004_autopep_sample.py
 ```
 
 --agressiveオプションを2つつけると修正内容がもっと増える
@@ -540,12 +547,9 @@ https://github.com/hhatto/autopep8#features
 
 #### 設定方法
 
-```
-[yapf]
-based_on_style = pep8/google/yapf/facebook
-spaces_before_comment = 4
-split_before_logical_operator = true
-```
+.style.yapf　というファイルに設定を書く
+
+---?code=.style.yapf
 
 - 58項目ぐらい設定できる
   - インデントの数
@@ -599,42 +603,30 @@ one = "two"
 ---
 
 - blackをかけてもflake8を通らないチェックがある
-- flake8からエラーを除外すればOK(blackの公式より))
+- flake8からエラーを除外すればOK
+
 
 ```
 [flake8]
-max-line-length = 90 
+max-line-length = 90
 ignore = E203, E501, W503
 ```
 
-
 ---
 
-005_conflict_black_flake8
-```
-# E203 Whitespace before ':'
-name_lists = ["tarou", "hanako", "ichitarou", ""]
-a = name_lists[1 + 1 :]
-
-# E501 line too long (XX > 79 characters)
-name = "jyugemujyugemu gokounosurikire kaijyarisuigyono suigyoumatu unnkoumatu."
-
-# W503 line break before binary operator
-income = (3
-          + 4)
-```
+---?code=src/005_conflict_black_flake8.py&lang=python
 
 ----
 
 まとめ
-- formatterには有名どことで３つある
+- formatterには有名どこで３つある
  - autopep8
     - pep8に従うことを是としたライブラリ
       - 設定は細かく行うことが出来る
  - yapf
-    - 細かい設定を充実させることで、プロジェクト毎にどんな設定でも作れるようにする
+    - 細かい設定を充実させることで、どんな形の正義にも合わせることが出来る
  - black
-    - フォーマットの設定が指定できないようにすることでかえって細かい論争を封じ込める
+    - フォーマットの設定が指定できないようにすることで聖戦を封じ込める
 
 ---
 未使用importや未使用変数の消し方
@@ -711,18 +703,8 @@ pre-commit installed at .git/hooks/pre-commit
 
 blackとflake8をかけるサンプル
 
-```
-repos:
--   repo: https://github.com/psf/black
-    rev: stable
-    hooks:
-    -   id: black
+---code=.pre-commit-config.yaml_smple1?lang=yaml
 
-- repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v2.0.0
-  hooks:
-    - id: flake8
-```
 
 ---
 
