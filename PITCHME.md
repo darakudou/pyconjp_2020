@@ -81,7 +81,7 @@ only in your heart !
 
 だいたい雑誌に書かれてます
 
----?image=assets/image_000_web_db_press.jpg&size=auto 50%
+![alt](assets/image_000_web_db_press.jpg)
 
 @snap[text-06]
 @quote[現場のPython ── システム開発も！ 機械学習も！<br>【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定](web+DBpress vol.117)
@@ -125,9 +125,7 @@ https://tell-k.github.io/pyconjp2014/#/
 
 ---?color=linear-gradient(180deg, 80%, 20%)
 
-@snap[north span-100]
 - 自分の映った写真がチェキしかないので公開できる写真ありません
-@snapend
 
 
 @snap[south span-100]
