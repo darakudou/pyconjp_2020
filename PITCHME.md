@@ -84,30 +84,25 @@ only in your heart !
 ![alt](assets/image_000_web_db_press.jpg)
 
 @snap[text-06]
-@quote[現場のPython ── システム開発も！ 機械学習も！<br>第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定](web+DBpress vol.117)
+@quote[現場のPython ── システム開発も！ 機械学習も！<br>【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定](web+DBpress vol.117)
 
-@snap[text-blue text-06]
+@snap[text-blue text-07]
 https://www.fujisan.co.jp/product/1281680264/b/1987343/
 
 ---
 
-あと去年のPyCon JP 2019でも類似の話題があります
-
-- Python開発を円滑に進めるためのツール設定
+- Python開発を円滑に進めるためのツール設定(PyCon JP 2019)
 @snap[text-blue text-08]
 https://pycon.jp/2019/schedule?sessionId=151
 
----
-
-### ちょっと違う部分
-- formatterのautopep8/yapfの紹介
-- とりあえずblackって正しいの？
-- pre-commitの紹介
+- リファクタリングツールあれこれ(PyCon JP 2014)
+https://tell-k.github.io/pyconjp2014/#/
 
 ---
 
-とりあえずこれだけ持ち帰って貰えれば:<br>
-pre-commitでblackを動かしてflake8でチェックする
+- 最低限持ち帰って欲しい内容
+  - pre-commitでblackを動かしてflake8でチェックする
+
 
 ---
 
@@ -122,7 +117,7 @@ pre-commitでblackを動かしてflake8でチェックする
 ---
 ### お前誰よ
 
-- Yuuki Nakajima 
+- Yuuki Nakajima
 - Python歴3年10ヶ月ぐらい？
 - Django(DjangoRestFramework)
 - AWS
@@ -132,6 +127,8 @@ pre-commitでblackを動かしてflake8でチェックする
 ---
 
 - 自分の映った写真がチェキしかないので公開できる写真ありません
+
+↑この一文で察した方は是非お話ししましょう
 
 ---
 
@@ -159,7 +156,7 @@ pre-commitでblackを動かしてflake8でチェックする
 % python src/001_spam_restaulant.py egg
 spam, egg, spam and spam!
 ```
-@[1](正しく動作する)
+@[2](正しく動作する)
 
 ---
 
@@ -169,8 +166,10 @@ PEP8：コード規約の紹介
 
 そもそもPEPってなに？
 
+```
 What is a PEP?
 PEP stands for Python Enhancement Proposal. A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment. The PEP should provide a concise technical specification of the feature and a rationale for the feature.
+```
 
 https://www.python.org/dev/peps/pep-0001/#id34
 
@@ -301,27 +300,8 @@ src/001_spam_restaulant.py:11:22: W292
 #### mccabe 
   - 複雑さをチェックする
 
-[002_complex_code.py]
-```
-def order(order):
+---?code=src/complex_code.py&lang=python
 
-    menus = ["egg and spam", "bacaon and spam", "egg bacon and spam",]
-    is_egg = False
-    for menu in menus:
-        if "egg" in order:
-            is_egg = True
-        if is_egg:
-            for m in menus:
-                if "egg" in m:
-                    return m
-    return "spam, spam, spam and spam"
-
-if __name__ == "__main__":
-    input = sys.argv[1]
-    orderd_menu = order(imput);
-    print(orderd_menu)
-
-```
 ---
 ### 複雑度が数字で表示される
 
