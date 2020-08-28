@@ -166,37 +166,33 @@ PEP8：コード規約の紹介
 
 そもそもPEPってなに？
 
-```
-What is a PEP?
-PEP stands for Python Enhancement Proposal. A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment. The PEP should provide a concise technical specification of the feature and a rationale for the feature.
-```
+---
 
+What is a PEP?<br>
+PEP stands for Python Enhancement Proposal.<br>
+
+PEPとはPython改良提案を意味する語の頭文字を取ってPEP
+
+---
+
+A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.<br>
+
+PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
+
+@snap[text-blue text-08]
 https://www.python.org/dev/peps/pep-0001/#id34
 
 ---
 
->What is a PEP?
-PEP stands for Python Enhancement Proposal.<br>
+PEPの例
 
->PEPとはPython改良提案を意味する語の頭文字を取ってPEP
-
->A PEP is a design document providing information to the Python community, or describing a new feature for Python or its processes or environment.<br>
-
->PEPは、Pythonコミュニティに情報を提供するか、Pythonまたはそのプロセスや環境の新機能を説明する設計ドキュメントです。
-
-
-
----
-
-###  PEPの例
 - PEP11
 - Removing support for little used platforms
 
-```
+
 Name: MS-DOS, MS-Windows 3.x
 Unsupported in: Python 2.0
 Code removed in: Python 2.1
-```
 
 https://www.python.org/dev/peps/pep-0011/
 
@@ -272,6 +268,8 @@ imported but unused
 src/001_spam_restaulant.py:5:5 local variable
  'guests' is assigned to but never used
 ```
+
+
 ---
 
 #### pycodestyle
