@@ -81,7 +81,7 @@ only in your heart !
 
 だいたい雑誌に書かれてます
 
----?image=assets/image_000_web_dbpress.jpg&size=auto 50%
+---?image=assets/image_000_web_db_press.jpg&size=auto 50%
 
 @snap[text-06]
 @quote[現場のPython ── システム開発も！ 機械学習も！<br>【第1回】開発支援ツールで安全で効率的に ……コード解析，型チェック，コードフォーマッタの実践的設定](web+DBpress vol.117)
@@ -91,10 +91,10 @@ https://www.fujisan.co.jp/product/1281680264/b/1987343/
 
 ---
 
-- Python開発を円滑に進めるためのツール設定(PyCon JP 2019)
+- Python開発を円滑に進めるためのツール設定(PyCon JP 2019)<br>
 https://pycon.jp/2019/schedule?sessionId=151
 
-- リファクタリングツールあれこれ(PyCon JP 2014)
+- リファクタリングツールあれこれ(PyCon JP 2014)<br>
 https://tell-k.github.io/pyconjp2014/#/
 
 ---
@@ -123,9 +123,7 @@ https://tell-k.github.io/pyconjp2014/#/
 - 必要なことはググりながら泥縄でなんとかしようとするタイプ
 - このスライドは2020/08/28 2:05+9:00に書いてる
 
----
-
----?color=linear-gradient(180deg, white 80%, white 20%)
+---?color=linear-gradient(180deg, 80%, 20%)
 
 @snap[north span-100]
 - 自分の映った写真がチェキしかないので公開できる写真ありません
@@ -268,13 +266,9 @@ PEP８とは
 - コードチェックimportのみライブラリや未使用変数をチェック
 
 ```
-% pyflakes src/001_spam_restaulant.py
-src/001_spam_restaulant.py:2:1 'datetime' 
-imported but unused
-src/001_spam_restaulant.py:5:5 local variable
- 'guests' is assigned to but never used
+% pyflakes src/001_spam_restaulant.py src/001_spam_restaulant.py:2:1 'datetime' imported but unused
+src/001_spam_restaulant.py:5:5 local variable 'guests' is assigned to but never used
 ```
-
 
 ---
 
@@ -398,13 +392,9 @@ https://pypi.org/project/pep8-naming/
 
 ---
 
----?code=src/003_f_string_faild.py&lang=python
-
----
+---?code=src/003_f_sting_faild.py&lang=python
 
 おわかりでしょうか？
-
----
 
 ---?code=src/003_f_string_faild.py&lang=python
 
@@ -612,8 +602,6 @@ max-line-length = 90
 ignore = E203, E501, W503
 ```
 
----
-
 ---?code=src/005_conflict_black_flake8.py&lang=python
 
 ----
@@ -703,8 +691,7 @@ pre-commit installed at .git/hooks/pre-commit
 
 blackとflake8をかけるサンプル
 
----code=.pre-commit-config.yaml_smple1?lang=yaml
-
+---?code=.pre-commit-config.yaml_smple1?lang=yaml
 
 ---
 
