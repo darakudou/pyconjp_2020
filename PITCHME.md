@@ -257,11 +257,6 @@ PEP８とは
 - コードチェックimportのみライブラリや未使用変数をチェック
 
 ```
-imaport datetime 
-
-guests = "Vaiking"
-```
-```
 % pyflakes src/001_spam_restaulant.py
 src/001_spam_restaulant.py:2:1 'datetime' 
 imported but unused
@@ -298,7 +293,7 @@ src/001_spam_restaulant.py:11:22: W292
 #### mccabe 
   - 複雑さをチェックする
 
----?code=src/complex_code.py&lang=python
+---?code=src/002_complex_code.py&lang=python
 
 ---
 ### 複雑度が数字で表示される
@@ -351,8 +346,6 @@ src/002_complex_code.py:2:1: C901 'order' is too complex (6)
 - プロジェクトのトップレベルに設定を書き出す
   - setup.cfg/.flake8/tox.ini等・・・
 
-- 参考
-
 .flake8 を追加
 ```
 [flake8]
@@ -365,16 +358,15 @@ max-complexity = 10
 % flake8 src/001_spam_restaulant.py
 ```
 
-
 ---
 
-- エラーコードの一覧<br>  
+- エラーコードの一覧  
 https://flake8.pycqa.org/en/latest/user/error-codes.html
 
-- pycodestyleのもの<br>
+- pycodestyleのもの
 https://pep8.readthedocs.io/en/latest/intro.html#error-codes
 
-- pep8-naming<br>>
+- pep8-naming
 https://pypi.org/project/pep8-naming/
 
 ---
@@ -403,19 +395,7 @@ https://pypi.org/project/pep8-naming/
 
 ---
 
-[003_f_string_faild.py]
-```
-import sys
-
-def order_menu(menu):
-    if menu in ["egg", "bacon", "baked bean"]:
-        return f"spam,{menu}, spam and spam!"
-    return f"spam, spam, spam, spam, spam and spam"
-
-if __name__ == "__main__":
-    input  = sys.argv[1]
-    print(order_menu(input))
-```
+---?code=003_f_string_faild.py
 
 ---
 
@@ -423,8 +403,9 @@ if __name__ == "__main__":
 
 ---
 
-`return f"spam, spam, spam, spam, spam and spam"`
+---?code=src/003_f_string.py&lang=python
 
+@[6](ここに注目！)
 ---
 
  - f"XX" は確かに"XX"と同じなので無意味
@@ -516,20 +497,26 @@ def get_spanish_inquisition_weapons_count(*args):
 
 - --inplaceオプションをつけてファイルを修正する
 - 基本は空白に関する修正のみ
+
 `autopep8 --in-place src/004_autopep_sample.py`
+
 ----
 
 使い方②
 
 --agressiveオプションをつけると修正内容が増える
 
-`autopep8 --in-place --agressive src/004_
-autopep_sample.py`
+```
+autopep8 --in-place --agressive src/004_
+autopep_sample.py
+```
 
 --agressiveオプションを2つつけると修正内容がもっと増える
 
-`autopep8 --in-place --agressive --agressive
- src/004_autopep_sample.py`
+```
+autopep8 --in-place --agressive --agressive
+ src/004_autopep_sample.py
+ ```
 
 ---
 
@@ -578,10 +565,12 @@ yapf --i --style='
 ```
 one = "two";
 ```
+
 ↓↓↓
 ```
 one = "two"
 ```
+
 ---
 
 ### black
@@ -639,22 +628,26 @@ income = (3
 
 まとめ
 - formatterには有名どことで３つある
- - black
-    - フォーマットの設定が指定できないようにすることでかえって細かい論争を封じ込める
- - yapf
-    − 細かい設定を充実させることで、プロジェクト毎にどんな設定でも作れるようにする
  - autopep8
     - pep8に従うことを是としたライブラリ
       - 設定は細かく行うことが出来る
+ - yapf
+    - 細かい設定を充実させることで、プロジェクト毎にどんな設定でも作れるようにする
+ - black
+    - フォーマットの設定が指定できないようにすることでかえって細かい論争を封じ込める
 
 ---
 未使用importや未使用変数の消し方
 
  - autflakeをかける
 
-`pip install autflake`
+```
+pip install autflake
+```
 
- `autoflake --in-place --remove-all-unused-imports --remove-unused-variables`
+ ```
+ autoflake --in-place --remove-all-unused-imports --remove-unused-variables
+ ```
 
 ---
 
@@ -670,8 +663,7 @@ income = (3
 ---
 
 - 個人的には大きいディスプレイで見るなら90文字以上あってもいいかも
-- ノートブックだけだと80文字ぐらいが見やすいかも
-- やっぱり79文字は少ない気がする
+- ノートブックだけだと80文字ぐらいが見やすいかも？ 
 
 ---
 
@@ -715,6 +707,8 @@ pre-commit installed at .git/hooks/pre-commit
 
 .pre-commit-config.yamlを用意してその中に実行したい内容を書く
 
+---
+
 blackとflake8をかけるサンプル
 
 ```
@@ -729,6 +723,7 @@ repos:
   hooks:
     - id: flake8
 ```
+
 ---
 
 ```
@@ -826,7 +821,7 @@ All done! ✨ 🍰 ✨
 - web + db press Vol.117
 https://www.fujisan.co.jp/product/1281680264/b/1987343
 
-- リファクタリングツールあれこれ
+- リファクタリングツールあれこれ<br>
 https://tell-k.github.io/pyconjp2014/#/
 - もうPythonの細かい書き方で議論しない。blackで自動フォーマットしよう
 https://blog.hirokiky.org/entry/2019/06/03/202745
