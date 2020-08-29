@@ -390,7 +390,7 @@ https://pypi.org/project/pep8-naming/
 
 ---
 
----?code=src/003_f_sting_faild.py&lang=python
+---?code=src/003_f_string_faild.py&lang=python
 
 おわかりでしょうか？
 
@@ -617,10 +617,10 @@ ignore = E203, E501, W503
 ---
 未使用importや未使用変数の消し方
 
- - autflakeをかける
+ - autoflakeをかける
 
 ```
-pip install autflake
+pip install autoflake
 ```
 
  ```
