@@ -396,7 +396,7 @@ https://pypi.org/project/pep8-naming/
 
 ---?code=src/003_f_string_faild.py&lang=python
 
-@[6](ここに注目！)
+@[7](ここに注目！)
 ---
 
  - f"XX" は確かに"XX"と同じなので無意味
